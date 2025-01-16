@@ -50,12 +50,35 @@ class HashMap {
   growHashMap() {
     return
   }
-  get(key) {}
+  get(key) {
+    let bucketNum = this.hash(key)
+    if (this.buckets[bucketNum] === undefined) {
+      return null
+    } else {
+      let current = this.buckets[bucketNum].head
+      while (current.key != key) {
+        current = current.next
+      }
+
+      return current.value
+    }
+  }
 }
 
 const fruitMap = new HashMap(0.75, 16)
-fruitMap.set("banana", 100)
-fruitMap.set("banana", 200)
-console.log(fruitMap.buckets[5])
-//console.log(fruitMap.buckets[5])
-//console.log(fruitMap.buckets)
+
+fruitMap.set("apple", "red")
+fruitMap.set("banana", "yellow")
+fruitMap.set("carrot", "orange")
+fruitMap.set("dog", "brown")
+fruitMap.set("elephant", "gray")
+fruitMap.set("frog", "green")
+fruitMap.set("grape", "purple")
+fruitMap.set("hat", "black")
+fruitMap.set("ice cream", "white")
+fruitMap.set("jacket", "blue")
+fruitMap.set("kite", "pink")
+fruitMap.set("lion", "golden")
+console.log(fruitMap.get("hat"))
+console.log(fruitMap.get("lion"))
+console.log(fruitMap.get("dog"))
