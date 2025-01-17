@@ -33,12 +33,13 @@ class HashMap {
       this.buckets[bucketNum].head = node
     } else {
       let current = this.buckets[bucketNum].head
+      if (current.key === key) {
+        current.value = value
+        return
+      }
+
       while (current.next) {
         current = current.next
-        if ((current.key = key)) {
-          current.value = value
-          return
-        }
       }
       current.next = new Node(key, value)
     }
@@ -48,7 +49,7 @@ class HashMap {
   checkCapacity() {
     let maxEntriesNumber = this.loadFactor * this.capacity
     if (this.length > maxEntriesNumber) {
-      growHashMap()
+      //growHashMap()
     }
   }
   growHashMap() {
@@ -154,5 +155,6 @@ fruitMap.set("ice cream", "white")
 fruitMap.set("jacket", "blue")
 fruitMap.set("kite", "pink")
 fruitMap.set("lion", "golden")
+fruitMap.set("kite", "new pink")
 
 console.log(fruitMap.entries())
