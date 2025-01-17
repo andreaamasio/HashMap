@@ -56,12 +56,20 @@ class HashMap {
       return null
     } else {
       let current = this.buckets[bucketNum].head
+
       while (current.key != key) {
-        current = current.next
+        if (current.next) {
+          current = current.next
+        } else return null
       }
 
       return current.value
     }
+  }
+  has(key) {
+    if (this.get(key)) {
+      return true
+    } else return false
   }
 }
 
@@ -79,6 +87,4 @@ fruitMap.set("ice cream", "white")
 fruitMap.set("jacket", "blue")
 fruitMap.set("kite", "pink")
 fruitMap.set("lion", "golden")
-console.log(fruitMap.get("hat"))
-console.log(fruitMap.get("lion"))
-console.log(fruitMap.get("dog"))
+console.log(fruitMap.has("haaaat"))
