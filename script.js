@@ -96,6 +96,34 @@ class HashMap {
     this.buckets = new Array(this.capacity)
     this.length = 0
   }
+  keys() {
+    let array = []
+    for (let bucket in this.buckets) {
+      array.push(this.buckets[bucket].key)
+      if (this.buckets[bucket].next != null) {
+        let current = this.buckets[bucket].next
+        while (current) {
+          array.push(current.key)
+          current = current.next
+        }
+      }
+    }
+    return array
+  }
+  values() {
+    let array = []
+    for (let bucket in this.buckets) {
+      array.push(this.buckets[bucket].value)
+      if (this.buckets[bucket].next != null) {
+        let current = this.buckets[bucket].next
+        while (current) {
+          array.push(current.value)
+          current = current.next
+        }
+      }
+    }
+    return array
+  }
 }
 
 const fruitMap = new HashMap(0.75, 16)
@@ -112,5 +140,5 @@ fruitMap.set("ice cream", "white")
 fruitMap.set("jacket", "blue")
 fruitMap.set("kite", "pink")
 fruitMap.set("lion", "golden")
-fruitMap.set("hat", "new")
-console.log(fruitMap.get("hat"))
+
+console.log(fruitMap.values())
