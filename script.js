@@ -49,11 +49,16 @@ class HashMap {
   checkCapacity() {
     let maxEntriesNumber = this.loadFactor * this.capacity
     if (this.length > maxEntriesNumber) {
-      //growHashMap()
+      this.growHashMap()
     }
   }
   growHashMap() {
-    return
+    console.log("needs to grow!")
+    this.length = 0
+    this.capacity *= 2
+    let content = this.entries()
+    this.buckets = new Array(this.capacity)
+    content.forEach((element) => this.set(element[0], element[1]))
   }
   get(key) {
     let bucketNum = this.hash(key)
@@ -156,5 +161,6 @@ fruitMap.set("jacket", "blue")
 fruitMap.set("kite", "pink")
 fruitMap.set("lion", "golden")
 fruitMap.set("kite", "new pink")
+fruitMap.set("tiger", "orange") // 13th
 
 console.log(fruitMap.entries())
