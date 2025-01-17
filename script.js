@@ -71,6 +71,23 @@ class HashMap {
       return true
     } else return false
   }
+  remove(key) {
+    if (this.has(key)) {
+      let bucketNum = this.hash(key)
+      let current = this.buckets[bucketNum].head
+      if (current.next === null) {
+        this.buckets[bucketNum].head = null
+        this.buckets[bucketNum] = null
+      } else {
+        while (current.next.key != key) {
+          current = current.next
+        }
+        current.next = null
+      }
+      this.length--
+      return true
+    } else return false
+  }
 }
 
 const fruitMap = new HashMap(0.75, 16)
@@ -87,4 +104,7 @@ fruitMap.set("ice cream", "white")
 fruitMap.set("jacket", "blue")
 fruitMap.set("kite", "pink")
 fruitMap.set("lion", "golden")
-console.log(fruitMap.has("haaaat"))
+console.log(`lenght: ${fruitMap.length}`)
+console.log(fruitMap.remove("lion"))
+console.log(fruitMap.has("lion"))
+console.log(`lenght after: ${fruitMap.length}`)
