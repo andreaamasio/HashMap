@@ -124,6 +124,20 @@ class HashMap {
     }
     return array
   }
+  entries() {
+    let array = []
+    for (let bucket in this.buckets) {
+      array.push([this.buckets[bucket].key, this.buckets[bucket].value])
+      if (this.buckets[bucket].next != null) {
+        let current = this.buckets[bucket].next
+        while (current) {
+          array.push([current.key, current.value])
+          current = current.next
+        }
+      }
+    }
+    return array
+  }
 }
 
 const fruitMap = new HashMap(0.75, 16)
@@ -141,4 +155,4 @@ fruitMap.set("jacket", "blue")
 fruitMap.set("kite", "pink")
 fruitMap.set("lion", "golden")
 
-console.log(fruitMap.values())
+console.log(fruitMap.entries())
